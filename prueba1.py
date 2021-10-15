@@ -14,7 +14,9 @@ for x in range(4, len(generalData)):
   print(generalData[x])
   #Separar generalData en caracteres
 
-  #agregar datos a diccionario
+  #if para comparar cada caracter, si es a, se va a cierto lado, si es b, a otro lado
+
+  #agregar datos obtenidos del if al diccionario
   transitionTable = {states[0] : ["q1","q2","q3"]}
 
 f.close()
