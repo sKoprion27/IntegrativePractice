@@ -44,10 +44,8 @@ def addTransitionStates():
     dictStatesToCharacter[transitionCharacter[0]] = {}
     # update the empty dict with the dict of the character and the states
     dictStatesToCharacter[transitionCharacter[0]].update(dictCharacterToStates)
-    # dictCharacterToStates.clear()
 
-  print("dictStatesToCharacter")
-  print(dictStatesToCharacter)
+
 
 # code from https://www.geeksforgeeks.org/python-split-string-into-list-of-characters/ 
 def split(word):
@@ -58,17 +56,22 @@ def validateString(string):
   res = string[::-1] 
 
   for x in res:
+    print("character")
     print(x)
     # print(dictStatesToCharacter.get(initialState).get(x))
     if ( (dictStatesToCharacter.get(initialState).get(x)) == None):
-      print("the string is not accepted because" + x + "is not a acceptep characer")
+      print("the string is not accepted because the character" + x  + "in the state " + y + " is not a accepted ")
     else:
+      print()
       nextState = dictStatesToCharacter.get(initialState).get(x)
+      print("nextState")
+      print(nextState)
     for y in nextState:
-      print("y : x")
-      print(y + ":" + x)
-
+      print("state to check")
+      print(y)
       print(dictStatesToCharacter.get(y).get(x))
+      if ( (dictStatesToCharacter.get(y).get(x)) == None):
+        print("the string is not accepted because the character" + x + "in the state " + y +" is not a accepted ")
 
 
 
