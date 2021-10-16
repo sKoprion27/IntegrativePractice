@@ -1,3 +1,6 @@
+# Julio de Jesús Ramírez Fernández A0170508
+# Ricardo Arturo Camarena Colón A01703831
+
 def fileManagment (fileName):
   # file-output.py
   f = open(fileName,'r')
@@ -18,26 +21,30 @@ def fileManagment (fileName):
 
 
 def addTransitionStates():
+  aux2 = 1
   dictCharacterToStates = {}
   global dictStatesToCharacter
   dictStatesToCharacter = {}
   for x in range(4, len(generalData)): 
-    print("x")
-    print(x)
+ 
     #split generalData to get the transitionsStates
     aux =generalData[x].split('=>')
     # split transitionCharacter to get the state and the character 
     transitionCharacter = aux[0].split(',')
     #  split to get the states of the conrvertion of the character
     transitionStates = aux[1].split(',')
+    # check if the transitionCharacter haved been used before 
+    if ( transitionCharacter[0] != aux2 ):
+      dictCharacterToStates.clear()
     # add to the dict dictCharacterToStates the character and the states 
     dictCharacterToStates[transitionCharacter[1]] = transitionStates
-    print("dictCharacterToStates")
-    print(dictCharacterToStates)
+    aux2 = transitionCharacter[0]
+
     # add a empty dict to the state
     dictStatesToCharacter[transitionCharacter[0]] = {}
     # update the empty dict with the dict of the character and the states
-    dictStatesToCharacter[transitionCharacter[x+1]].update(dictCharacterToStates)
+    dictStatesToCharacter[transitionCharacter[0]].update(dictCharacterToStates)
+    # dictCharacterToStates.clear()
 
   print("dictStatesToCharacter")
   print(dictStatesToCharacter)
@@ -69,9 +76,9 @@ print("Plase introduce the name of the files with '.txt' at the end")
 fileName = input()
 fileManagment(fileName)
 addTransitionStates()
-# print("Plase introduce the string to validate")
-# #get the string from the user
-# stringUser = input()
-# stringLetters = split(stringUser)
-# # print(stringLetters)
-# validateString(stringLetters)
+print("Plase introduce the string to validate")
+#get the string from the user
+stringUser = input()
+stringLetters = split(stringUser)
+# print(stringLetters)
+validateString(stringLetters)
