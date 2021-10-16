@@ -56,22 +56,22 @@ def validateString(string):
   res = string[::-1] 
 
   for x in res:
-    print("character")
-    print(x)
     # print(dictStatesToCharacter.get(initialState).get(x))
     if ( (dictStatesToCharacter.get(initialState).get(x)) == None):
-      print("the string is not accepted because the character" + x  + "in the state " + y + " is not a accepted ")
+      print("the string is not accepted because the character " + x  + " in the state " + initialState + " is not a accepted ")
     else:
-      print()
+      print("the character " + x + " in the state " + initialState + " is accepted")
       nextState = dictStatesToCharacter.get(initialState).get(x)
-      print("nextState")
+      print("next state to check")
       print(nextState)
     for y in nextState:
       print("state to check")
       print(y)
-      print(dictStatesToCharacter.get(y).get(x))
+      # print(dictStatesToCharacter.get(y).get(x))
       if ( (dictStatesToCharacter.get(y).get(x)) == None):
-        print("the string is not accepted because the character" + x + "in the state " + y +" is not a accepted ")
+        print( x + " in the state " + y +" is not a accepted ")
+      else:
+        print( x + " in the state " + y +" is accepted ")
 
 
 
