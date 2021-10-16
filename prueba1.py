@@ -22,13 +22,22 @@ def addTransitionStates():
   global dictStatesToCharacter
   dictStatesToCharacter = {}
   for x in range(4, len(generalData)): 
+    print("x")
+    print(x)
     #split generalData to get the transitionsStates
     aux =generalData[x].split('=>')
+    # split transitionCharacter to get the state and the character 
     transitionCharacter = aux[0].split(',')
+    #  split to get the states of the conrvertion of the character
     transitionStates = aux[1].split(',')
+    # add to the dict dictCharacterToStates the character and the states 
     dictCharacterToStates[transitionCharacter[1]] = transitionStates
+    print("dictCharacterToStates")
+    print(dictCharacterToStates)
+    # add a empty dict to the state
     dictStatesToCharacter[transitionCharacter[0]] = {}
-    dictStatesToCharacter[transitionCharacter[0]].update(dictCharacterToStates)
+    # update the empty dict with the dict of the character and the states
+    dictStatesToCharacter[transitionCharacter[x+1]].update(dictCharacterToStates)
 
   print("dictStatesToCharacter")
   print(dictStatesToCharacter)
@@ -37,16 +46,32 @@ def addTransitionStates():
 def split(word):
     return [char for char in word]
 
-def validateString(string):
-  print(string)
+def validateString(string):  
+  #reversing the string using list slicing
+  res = string[::-1] 
+
+  for x in res:
+    print(x)
+    # print(dictStatesToCharacter.get(initialState).get(x))
+    if ( (dictStatesToCharacter.get(initialState).get(x)) == None):
+      print("the string is not accepted because" + x + "is not a acceptep characer")
+    else:
+      nextState = dictStatesToCharacter.get(initialState).get(x)
+    for y in nextState:
+      print("y : x")
+      print(y + ":" + x)
+
+      print(dictStatesToCharacter.get(y).get(x))
 
 
-print("Plase introduce the name of the files with .txt at the end")
+
+print("Plase introduce the name of the files with '.txt' at the end")
 fileName = input()
 fileManagment(fileName)
 addTransitionStates()
-print("Plase introduce the string to validate")
-stringUser = input()
-stringLetters = split(stringUser)
-# print(stringLetters)
-
+# print("Plase introduce the string to validate")
+# #get the string from the user
+# stringUser = input()
+# stringLetters = split(stringUser)
+# # print(stringLetters)
+# validateString(stringLetters)
