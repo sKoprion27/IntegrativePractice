@@ -1,13 +1,15 @@
-
-
-
 def fileManagment (fileName):
   # file-output.py
   f = open(fileName,'r')
   message = f.read()
   # split data
+  global generalData
   generalData = message.splitlines()
   # print(generalData)
+  global states
+  global alphabet
+  global initialState
+  global finalState
   states = generalData[0].split(',')       #['q0', 'q1', 'q2', 'q3']
   alphabet  = generalData[1].split(',')    #['a', 'b']
   initialState  = generalData[2]           #q0
@@ -15,20 +17,36 @@ def fileManagment (fileName):
   f.close()
 
 
-def addTransitionStates (generalData):
-
-  for x in range(4, len(generalData)):
-    # print(generalData[x])
-    #Separar generalData en en estado de enetrada, carater de los estado a donde tranciciona
+def addTransitionStates():
+  dictCharacterToStates = {}
+  global dictStatesToCharacter
+  dictStatesToCharacter = {}
+  for x in range(4, len(generalData)): 
+    #split generalData to get the transitionsStates
     aux =generalData[x].split('=>')
-    
-    print("aux[0].split(',')")
-    print(aux[0].split(','))
-    #Separar generalData en caracteres
-  
-    #if para comparar cada caracter, si es a, se va a cierto lado, si es b, a otro lado
+    transitionCharacter = aux[0].split(',')
+    transitionStates = aux[1].split(',')
+    dictCharacterToStates[transitionCharacter[1]] = transitionStates
+    dictStatesToCharacter[transitionCharacter[0]] = {}
+    dictStatesToCharacter[transitionCharacter[0]].update(dictCharacterToStates)
 
-    #agregar datos obtenidos del if al diccionario
-    transitionTable = {states[0] : ["q1","q2","q3"]}
+  print("dictStatesToCharacter")
+  print(dictStatesToCharacter)
 
-  print(transitionTable)
+# code from https://www.geeksforgeeks.org/python-split-string-into-list-of-characters/ 
+def split(word):
+    return [char for char in word]
+
+def validateString(string):
+  print(string)
+
+
+print("Plase introduce the name of the files with .txt at the end")
+fileName = input()
+fileManagment(fileName)
+addTransitionStates()
+print("Plase introduce the string to validate")
+stringUser = input()
+stringLetters = split(stringUser)
+# print(stringLetters)
+
